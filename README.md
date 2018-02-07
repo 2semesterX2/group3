@@ -8,5 +8,4 @@
 * Razvan Synaptyc
 
 ## random image ##
-
-(https://source.unsplash.com/featured/?{team},{fun} 'Random picture of a team')
+![alt text](https://source.unsplash.com/featured/?{team},{fun} 'Random picture of a team')
