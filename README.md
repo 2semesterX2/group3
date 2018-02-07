@@ -1,6 +1,6 @@
 # group3
 
-## group member ##
+## group members ##
 
 * Robert Wolf
 * Tanja Sørensen
@@ -8,4 +8,4 @@
 * Razvan Synaptyc
 
 ## random image ##
-![alt text](https://source.unsplash.com/featured/?{team},{fun} 'Random picture of a team')
+![alt text](https://source.unsplash.com/random/?{team},{fun} 'Random picture of a team')
