@@ -5,4 +5,8 @@
 * Robert Wolf
 * Tanja Sørensen
 * Stefani Yotova
-* Razan Synaptyc
+* Razvan Synaptyc
+
+## random image ##
+
+(https://source.unsplash.com/featured/?{team},{fun} 'Random picture of a team')
