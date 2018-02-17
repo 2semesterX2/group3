@@ -61,6 +61,7 @@
 
 <body>
 <article>
+<section class="intro">
 <section id="videobox">
     <picture class="hero">
         <source media="(min-width: 500px)" srcset="assets/img/hero_big.jpg">
@@ -91,18 +92,51 @@
         <source src="assets/video/friendship.mp4" type="video/mp4">
         Sadly, your browser is too old for this cool website.
     </video>
+    <a id="readmore" href="#more">readmore</a>
 </section>
 
-<header class="intro">
+<header>
+    <div>
     <h1>Better education for better future!</h1>
     <p>At Koch’s skole, we believe that friendship knows no borders! Just ask the kids where are their friends from.</p>
     <a data-name="hi" id="openButton">Let's talk together</a>
+    </div>
 </header>
 
-<section>
+</section>
+<section id="more">
+<div class="cards">
+    <figure>
+        <img src="assets/img/building.jpg" alt="Koch's skole">
+        <figcaption>Koch’s international is a place for everyone.</figcaption>
+    </figure>
+    <figure>
+        <img src="assets/img/friends.jpg" alt="International friends">
+        <figcaption>A place where kids from all over the world can be friends together.</figcaption>
+    </figure>
+    <figure>
+        <img src="assets/img/building.jpg" alt="Bilingual education">
+        <figcaption>We promote bilingual education with focus on cultural awareness.</figcaption>
+    </figure>
+</div>
+    <figure class="parallax">
+        <img src="assets/img/outdoor.jpg" alt="Outdoor school">
+        <figcaption>One day a week, we have an outdoor school.</figcaption>
+    </figure>
 
 </section>
+<footer>
+    <p>learn more about the programme at:</p>
+    <a href="http://www.kochs.dk/international/">
+        <img src="assets/img/kochs.png" alt="Koch's international logo">.dk
+    </a>
+</footer>
 </article>
+
+<audio id="backgroundSound" autoplay loop>
+    <source src="assets/audio/background.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
 	<!-- JavaScript -->
 	<script src="script.js"></script>
