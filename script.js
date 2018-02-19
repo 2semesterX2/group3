@@ -27,6 +27,9 @@ window.onscroll = function () {
 
     const image = parallax.querySelector('img');
     image.style["object-position"] = value + '%' + value + '%';
+
+    // show more content on scroll
+    document.body.classList.add('appearMore');
 }
 
 function openVideo() {
@@ -38,7 +41,7 @@ function openVideo() {
     targetVideo.play();
 
     // show more content
-    document.body.classList.add('more');
+    document.body.classList.add('loadMore');
 }
 
 function playVideo() {
@@ -56,7 +59,6 @@ function hideVideo() {
     videoBox.classList.add('waiting');
     this.currentTime = 0;
 }
-
 
 
 openButton.addEventListener('click', openVideo);
