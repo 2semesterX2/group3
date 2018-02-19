@@ -4,17 +4,19 @@ const videoBox = document.getElementById('videobox');
 const questions = Array.from(videoBox.querySelectorAll('p'));
 const videos = Array.from(videoBox.querySelectorAll('video'));
 
+const readmore = document.getElementById('readmore');
+const more = document.getElementById('more');
 
 const windowHeight = window.innerHeight;
 const parallax = document.querySelector('.parallax');
 
-window.onload = function() {
+window.onload = function () {
     // fix for slide down animation
-    const elHeight = window.getComputedStyle(header, null).getPropertyValue('height');
+    const elHeight = window.getComputedStyle(header).getPropertyValue('height');
     header.style.height = elHeight;
 }
 
-window.onscroll = function() {
+window.onscroll = function () {
     const position = parallax.getBoundingClientRect().top;
     let value = position / windowHeight * 100;
     if (value > 100) {
@@ -22,7 +24,7 @@ window.onscroll = function() {
     } else if (value < 0) {
         value = 0
     }
-    
+
     const image = parallax.querySelector('img');
     image.style["object-position"] = value + '%' + value + '%';
 }
@@ -30,10 +32,13 @@ window.onscroll = function() {
 function openVideo() {
     header.classList.add('hide');
     videoBox.classList.add('open');
-   
+
     const targetVideo = document.querySelector(`video[data-name="${this.dataset.name}"]`);
     targetVideo.classList.add('active');
     targetVideo.play();
+
+    // show more content
+    document.body.classList.add('more');
 }
 
 function playVideo() {
@@ -52,6 +57,9 @@ function hideVideo() {
     this.currentTime = 0;
 }
 
+
+
 openButton.addEventListener('click', openVideo);
 questions.forEach(question => question.addEventListener('click', playVideo));
 videos.forEach(video => video.addEventListener('ended', hideVideo))
+readmore.addEventListener('click', () => scrollIt(more, 1000, 'easeInOutQuad'));

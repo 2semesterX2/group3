@@ -1,21 +1,82 @@
+/* colors */
+
 $black: #131617;
 $grey: #344447;
 $blue: #37D9FA;
 $yellow: #E8BE33;
 $red: #FF7438;
+$black-alt: #151717;
+$grey-alt: #3B4747;
+$blue-alt: #69FAFA;
+$yellow-alt: #E8B261;
+$red-alt: #FF7F6B;
+/* mixins */
+
+@mixin slideUpAnimation() {
+    display: none;
+    opacity: 0;
+    animation: slideUp 2s;
+    animation-delay: 6s;
+    animation-fill-mode: forwards;
+}
+
+/* animations */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+}
+
+@keyframes floating {
+	0% {
+		transform: translateX(0.5em) translateY(0.2em);
+	}
+	25% {}
+	50% {
+		transform: translateX(-0.1em) translateY(-0.3em);
+	}
+	75% {
+		transform: translateX(-0.2em) translateY(0.2em);
+	}
+	100% {
+		transform: translateX(0.5em) translateY(0.2em);
+	}
+}
+
+/* normalize */
 
 @import 'https://necolas.github.io/normalize.css/8.0.0/normalize.css';
+/* fonts */
 
 @font-face {
     src: url('assets/fonts/humanist_roman.woff');
     font-family: Humanist;
     font-weight: 400;
 }
+
 @font-face {
     src: url('assets/fonts/humanist_light.woff');
     font-family: Humanist;
     font-weight: 300;
 }
+
 @font-face {
     src: url('assets/fonts/humanist_bold.woff');
     font-family: Humanist;
@@ -23,7 +84,6 @@ $red: #FF7438;
 }
 
 // generel styles
-
 .button {
     cursor: pointer;
     border-radius: 2.2em;
@@ -31,24 +91,33 @@ $red: #FF7438;
     background-color: $black;
     color: white;
     text-decoration: none;
+    font-weight: 300;
+    letter-spacing: .02em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, .3);
 }
-
 
 p {
     line-height: 1.5em;
 }
 
 // layout
-
 body {
     max-width: 100%;
     overflow-x: hidden;
     font: 18px Humanist, sans-serif;
     background-color: $black;
+    &.more {
+        max-height: initial;
+        #readmore {
+            display: block !important;
+        }
+        #more {
+            display: block !important;
+        }
+    }
 }
 
 .intro {
-
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -73,6 +142,11 @@ body {
     * {
         max-width: 100%;
     }
+    picture, img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     video {
         position: absolute;
         top: 50%;
@@ -95,19 +169,13 @@ body {
         @extend .button;
         background-color: white;
         color: $black;
-
-        display: none;
-        animation: fadeIn;
-        animation-delay: 1s;
-
+        @include slideUpAnimation();
         position: relative;
         z-index: 10;
-
         margin-top: auto;
         margin-bottom: 1rem;
     }
-
-    &.waiting{
+    &.waiting {
         video {
             filter: blur(10px);
         }
@@ -117,26 +185,23 @@ body {
                 display: none;
             }
         }
-        #readmore {
-            display: block;
+    }
+    p[data-name="language"] {
+        background-image: linear-gradient(120deg, $blue 0%, $blue-alt 100%);
+    }
+    p[data-name="friends"] {
+        background-image: linear-gradient(120deg, $red 0%, $red-alt 100%);
+    }
+    p[data-name="school"] {
+        background-image: linear-gradient(120deg, $yellow 0%, $yellow-alt 100%);
+    }
+    p[data-name="friendship"] {
+        background-image: linear-gradient(120deg, $grey 0%, $grey-alt 100%);
+    }
+    @media screen and (max-width: 720px) {
+        p:nth-of-type(n+3) {
+            display: none !important;
         }
-    }
-
-    p:nth-of-type(1) {
-        background-color: $blue;
-    }
-    p:nth-of-type(2) {
-        background-color: $red;
-    }
-    p:nth-of-type(3) {
-        background-color: $yellow;
-    }
-    p:nth-of-type(4) {
-        background-color: $grey;
-    }
-
-    p:nth-of-type(n + 3) {
-        display: none !important;
     }
 }
 
@@ -151,21 +216,21 @@ header {
     transition: all 1s;
     margin-top: -.5rem;
     div {
-    margin-top: -3rem;
-      border-radius: .5rem;
-      padding: 1.5rem;
-      background-color: white;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      * {
-          margin: .67rem 0;
-      }
-      a {
-          @extend .button;
-      }
+        margin-top: -3rem;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        background-color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        * {
+            margin: .67rem 0;
+        }
+        a {
+            @extend .button;
+        }
     }
     &.hide {
         flex-grow: 0;
@@ -178,8 +243,11 @@ header {
 
 #more {
     background-color: $grey;
+    text-shadow: none;
     padding: 3rem 0;
     position: relative;
+    z-index: 5;
+    @include slideUpAnimation();
     &::before {
         content: '';
         position: absolute;
@@ -188,57 +256,53 @@ header {
         top: 0;
         left: 0;
         background-color: $grey;
-        transform: skewY(5deg) translateY(-50%);
+        transform: skewY(3deg) translateY(-50%);
     }
-.cards {
-    width: 100%;
-    figure {
+    .cards {
+        figure {
+            width: 100%;
+            margin: 3rem 0;
+            img {
+                width: 100%;
+            }
+            figcaption {
+                position: relative;
+                z-index: 5;
+                background-color: white;
+                color: $black;
+                padding: 1.2rem;
+                margin: -2rem 1rem 0;
+                border-radius: .5rem;
+                text-align: center;
+                font-size: 1.5rem;
+            }
+        }
+    }
+    .parallax {
+        height: 60vh;
         width: 100%;
-        margin: 3rem 0;
+        margin: 2rem 0;
+        position: relative;
         img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50%;
+            opacity: .5;
         }
         figcaption {
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 5;
-
-            background-color: white;
-            color: $black;
-            padding: 1.2rem;
-            margin: -2rem 1rem 0;
-            border-radius: .5rem;
-
+            color: white;
             text-align: center;
             font-size: 1.5rem;
+            width: 90vw;
+            max-width: 10em;
         }
     }
-}
-.parallax {
-    height: 60vh;
-    width: 100%;
-    margin: 2rem 0;
-    position: relative;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 50%;
-        opacity: .5;
-    }
-    figcaption {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 5;
-        color: white;
-
-        text-align: center;
-        font-size: 1.5rem;
-        width: 90vw;
-        max-width: 10em;
-    }
-}
 }
 
 footer {
@@ -269,7 +333,55 @@ footer {
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-      to { opacity: 1; }
+
+/* desktop */
+
+@media screen and (min-width: 720px) {
+    #videobox {
+        height: 100vh;
+        picture, video {
+            max-height: 90%;
+            width: 100%;
+            object-fit: cover;
+        }
+        p {
+            position: absolute;
+            animation: floating 10s ease-in-out infinite forwards;
+        }
+        p[data-name="language"] {
+            top: 30%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+        p[data-name="friends"] {
+            top: 60%;
+            left: 20%;
+            animation-delay: -4s;
+        }
+        p[data-name="school"] {
+            top: 30%;
+            right: 20%;
+        }
+        p[data-name="friendship"] {
+            top: 60%;
+            right: 20%;
+            animation-delay: -1s;
+        }
+    }
+    header {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        transform: translateY(-50%);
+
+        width: 350px;
+        background-color: initial;
+    }
+    .cards {
+        display: flex;
+        padding: .5rem;
+        figure {
+            padding: .5rem;
+        }
+    }
 }
